@@ -161,14 +161,18 @@
                      </styleClass>
                   </Button>
                </children></HBox>
-            <TextFlow prefHeight="152.0" prefWidth="458.0" styleClass="alert-success" textAlignment="CENTER">
+            <TextFlow fx:id="textFlow" prefHeight="152.0" prefWidth="458.0" textAlignment="CENTER">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" ">
+                  <Text fx:id="mensaje" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h4">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Text>
                </children>
+               <styleClass>
+                  <String fx:value="alert" />
+                  <String fx:value="alert-success" />
+               </styleClass>
             </TextFlow>
          </children>
       </VBox>

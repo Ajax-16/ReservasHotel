@@ -147,7 +147,11 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#deleteButton" styleClass="btn" text="ELIMINAR" />
+                        <Button mnemonicParsing="false" onAction="#deleteButton" text="ELIMINAR">
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="btn-danger" />
+                           </styleClass></Button>
                      </children>
                   </HBox>
                </children></VBox>

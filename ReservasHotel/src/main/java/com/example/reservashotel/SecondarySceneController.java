@@ -49,9 +49,12 @@ public class SecondarySceneController implements Initializable {
     public PreparedStatement insertReserva;
     Properties  properties = new Properties();
     FileOutputStream fo = new FileOutputStream("id.txt");
-    FileInputStream fi = new FileInputStream("id.txt");
+    private PrimarySceneController primarySceneController;
 
     public SecondarySceneController() throws FileNotFoundException {
+
+
+
     }
 
     @FXML
@@ -62,7 +65,9 @@ public class SecondarySceneController implements Initializable {
         if(nombre.getText().equals("") || apellido1.getText().equals("") || apellido2.getText().equals("") ||
                 tipoAlojamiento.getText().equals("") || numNoches.getText().equals("")){
 
-            System.out.println("ERROR: Campo vacío");
+            iniciaPrimeraEscena();
+
+            primarySceneController.actualizaMensajes("La inserción no se realizó con éxito porque algunos campos estaban vacíos.", "alert-danger");
 
         }else{
 
@@ -82,7 +87,11 @@ public class SecondarySceneController implements Initializable {
                 // Cerrar la consulta
                 maxIdStmt.close();
             } catch (SQLException e) {
-                System.out.println("Error al obtener el máximo id_alojamiento: " + e.getMessage());
+
+                iniciaPrimeraEscena();
+
+                primarySceneController.actualizaMensajes("Error al obtener credenciales en ID alojamiento. Revise la base de datos.", "alert-warning");
+
             }
 
             numAlojamientos++;
@@ -121,27 +130,53 @@ public class SecondarySceneController implements Initializable {
             apellido2.clear();
             numNoches.clear();
 
-        }
+            iniciaPrimeraEscena();
 
-        iniciaPrimeraEscena();
+            primarySceneController.actualizaMensajes("Inserción realizada con éxito", "alert-success");
+
+        }
 
     }
 
     @FXML
     protected void deleteButton() throws SQLException, IOException {
 
-        String sql = "DELETE FROM reservas WHERE id = " + Integer.parseInt(fieldIdDelete.getText());
+        Statement getIdStm = HotelApp.conn.createStatement();
 
-        Statement pst = HotelApp.conn.createStatement();
+        ResultSet IdRs = getIdStm.executeQuery("SELECT id FROM reservas WHERE id = " + Integer.parseInt(fieldIdDelete.getText()));
 
-        pst.executeUpdate(sql);
+        if((IdRs.next() ? IdRs.getInt(1) : 0 ) == Integer.parseInt(fieldIdDelete.getText())) {
 
-        iniciaPrimeraEscena();
+            String sql = "DELETE FROM reservas WHERE id = " + Integer.parseInt(fieldIdDelete.getText());
+
+            Statement pst = HotelApp.conn.createStatement();
+
+            pst.executeUpdate(sql);
+
+            iniciaPrimeraEscena();
+
+        }else{
+
+            iniciaPrimeraEscena();
+
+            primarySceneController.actualizaMensajes("Eliminación fallida. Id de reserva no encontrado.", "alert-danger");
+
+        }
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        FXMLLoader fxmlLoader1 = new FXMLLoader(HotelApp.class.getResource("primaryScene.fxml"));
+
+        try {
+            fxmlLoader1.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        primarySceneController = fxmlLoader1.getController();
 
         if(PrimarySceneController.insertAcces){
 
@@ -191,6 +226,8 @@ public class SecondarySceneController implements Initializable {
 
         primaryStage.setTitle("Hotel");
 
+        primarySceneController = fxmlLoader1.getController();
+
         primaryStage.show();
 
         HotelApp.getLastStage().close();
@@ -198,5 +235,7 @@ public class SecondarySceneController implements Initializable {
         HotelApp.setLastStage(primaryStage);
 
     }
+
+
 
 }

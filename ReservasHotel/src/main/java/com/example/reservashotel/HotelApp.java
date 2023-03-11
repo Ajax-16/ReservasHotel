@@ -40,17 +40,34 @@ public class HotelApp extends Application {
 
     public static void main(String[] args) throws SQLException {
 
-        String url = """    
-                jdbc:mysql://192.168.1.170:3306/hotel?allowPublicKeyRetrieval=true&useSSL=false
-                """;
+        try {
 
-        conn = null;
+            // Para producción
 
-        conn = DriverManager.getConnection(url, "root", "root");
+            String url = """
+                    jdbc:mysql://localhost:3306/hotel?allowPublicKeyRetrieval=true&useSSL=false
+                    """;
 
-        System.out.println("Conectado con la base de datos con éxito.");
+            /*  Para desarrollo
 
-        launch();
+             String url = """
+                    jdbc:mysql://192.168.1.170:3306/hotel?allowPublicKeyRetrieval=true&useSSL=false
+                    """;
+
+             */
+            conn = null;
+
+            conn = DriverManager.getConnection(url, "root", "root");
+
+            System.out.println("Conectado con la base de datos con éxito.");
+
+            launch();
+
+        }catch (SQLException e){
+
+            System.out.println("Error en la conexión con la base de datos. Reinicio necesario.");
+
+        }
 
     }
 }

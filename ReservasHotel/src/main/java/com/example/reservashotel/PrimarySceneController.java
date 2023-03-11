@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import org.kordamp.bootstrapfx.BootstrapFX;
 
@@ -19,6 +20,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class PrimarySceneController implements Initializable{
@@ -30,13 +32,20 @@ public class PrimarySceneController implements Initializable{
     public static boolean modifyAcces = false;
 
     public static boolean deleteAcces = false;
-
+    private SecondarySceneController secondarySceneController;
     @FXML
     private VBox areaInserciones;
     @FXML
     private TextField areaBusqueda;
+    @FXML
+    public TextFlow textFlow;
+    @FXML
+    public Text mensaje;
 
     public PrimarySceneController() throws FileNotFoundException {
+
+
+
     }
 
     @FXML
@@ -84,6 +93,10 @@ public class PrimarySceneController implements Initializable{
 
             }
 
+        }else{
+
+            actualizaMensajes("Busqueda no válida. Debes introducir algún valor.", "alert-danger");
+
         }
 
     }
@@ -101,6 +114,8 @@ public class PrimarySceneController implements Initializable{
         secondaryStage.setScene(secondaryScene);
 
         secondaryStage.setTitle("Gestor de reservas");
+
+        secondarySceneController = fxmlLoader2.getController();
 
         secondaryStage.show();
 
@@ -131,9 +146,17 @@ public class PrimarySceneController implements Initializable{
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+
+            actualizaMensajes("Base de datos no coincidente. Se requiere revisión.", "alert-danger");
+
         }
 
+        try {
+            String saludoPorHora = (LocalTime.now().getHour() < 12 &&  LocalTime.now().getHour() > 7) ? "Buenos días" : ((LocalTime.now().getHour() < 20) ? "Buenas tardes" : "Buenas noches");
+            actualizaMensajes(saludoPorHora + " usuario: " + eliminaIP(HotelApp.conn.getMetaData().getUserName()), "alert-success");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void insertaFila(String idS, String nombreS, String apellidosS, String tipoS, String numNochesS, String precioS){
@@ -202,10 +225,33 @@ public class PrimarySceneController implements Initializable{
 
     }
 
-    public void clean() throws SQLException {
+    public void clean() {
 
         areaInserciones.getChildren().clear();
 
+    }
+
+    public void actualizaMensajes(String mensajeTexto, String claseCSS) {
+        mensaje.setText(mensajeTexto);
+        textFlow.getStyleClass().removeAll("alert-success", "alert-danger");
+        textFlow.getStyleClass().add(claseCSS);
+    }
+
+    public String eliminaIP(String user){
+
+        int breakpoint = 0;
+
+        for(int i = 0; i<user.toCharArray().length; i++){
+
+            if(user.toCharArray()[i] == '@'){
+
+                breakpoint = i;
+
+            }
+
+        }
+
+        return user.substring(0, breakpoint);
 
     }
 

@@ -40,6 +40,8 @@ public class HotelApp extends Application {
 
     public static void main(String[] args) throws SQLException {
 
+        // empieza el programa
+
         launch();
 
     }

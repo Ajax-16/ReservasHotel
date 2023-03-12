@@ -28,8 +28,8 @@ public class HotelApp extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader1 = new FXMLLoader(HotelApp.class.getResource("primaryScene.fxml"));
-        primaryScene = new Scene(fxmlLoader1.load(), 1280, 720);
+        FXMLLoader fxmlLoader1 = new FXMLLoader(HotelApp.class.getResource("inicioSesion.fxml"));
+        primaryScene = new Scene(fxmlLoader1.load(), 600, 400);
         primaryScene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
         stage.setResizable(false);
         stage.setTitle("Hotel");
@@ -40,34 +40,8 @@ public class HotelApp extends Application {
 
     public static void main(String[] args) throws SQLException {
 
-        try {
-
-            // Para producción
-
-            String url = """
-                    jdbc:mysql://localhost:3306/hotel?allowPublicKeyRetrieval=true&useSSL=false
-                    """;
-
-            /*  Para desarrollo
-
-             String url = """
-                    jdbc:mysql://192.168.1.170:3306/hotel?allowPublicKeyRetrieval=true&useSSL=false
-                    """;
-
-             */
-            conn = null;
-
-            conn = DriverManager.getConnection(url, "root", "root");
-
-            System.out.println("Conectado con la base de datos con éxito.");
-
-            launch();
-
-        }catch (SQLException e){
-
-            System.out.println("Error en la conexión con la base de datos. Reinicio necesario.");
-
-        }
+        launch();
 
     }
+
 }

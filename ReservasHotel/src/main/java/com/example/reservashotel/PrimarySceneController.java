@@ -152,7 +152,7 @@ public class PrimarySceneController implements Initializable{
         }
 
         try {
-            String saludoPorHora = (LocalTime.now().getHour() < 12 &&  LocalTime.now().getHour() > 7) ? "Buenos días" : ((LocalTime.now().getHour() < 20) ? "Buenas tardes" : "Buenas noches");
+            String saludoPorHora = (LocalTime.now().getHour() < 12 &&  LocalTime.now().getHour() > 6) ? "Buenos días" : ((LocalTime.now().getHour() >= 12 && LocalTime.now().getHour() < 20) ? "Buenas tardes" : "Buenas noches");
             actualizaMensajes(saludoPorHora + " usuario: " + eliminaIP(HotelApp.conn.getMetaData().getUserName()), "alert-success");
         } catch (SQLException e) {
             throw new RuntimeException(e);

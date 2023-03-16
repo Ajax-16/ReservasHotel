@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="panel-primary" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.reservashotel.PrimarySceneController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="852.0" minWidth="10.0" prefWidth="822.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="618.0" minWidth="10.0" prefWidth="458.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="351.0" minHeight="10.0" prefHeight="104.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="353.0" minHeight="10.0" prefHeight="302.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="313.0" minHeight="0.0" prefHeight="313.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="panel-heading" GridPane.columnSpan="2">
+         <children>
+            <ImageView fitHeight="100.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets right="150.0" />
+               </HBox.margin>
+               <image>
+                  <Image url="@../images/hotel.png" />
+               </image>
+            </ImageView>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RESERVAS HOTEL">
+               <font>
+                  <Font size="45.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="h1" />
+                  <String fx:value="strong" />
+               </styleClass>
+            </Text>
+            <ImageView fitHeight="100.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets left="150.0" />
+               </HBox.margin>
+               <image>
+                  <Image url="@../images/hotel.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <VBox prefHeight="615.0" prefWidth="807.0" GridPane.rowIndex="1" GridPane.rowSpan="2">
+         <children>
+            <HBox prefHeight="71.0" prefWidth="822.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="137.0" styleClass="lbl-primary">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h4" text="ID" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="137.0" styleClass="lbl-primary">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h4" text="NOMBRE" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="137.0" styleClass="lbl-primary">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h4" text="APELLIDOS" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="137.0" styleClass="lbl-primary">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h4" text="ALOJAMIENTO" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="137.0" styleClass="lbl-primary">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h4" text="NOCHES" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="137.0" styleClass="lbl-primary">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h4" text="PRECIO" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <VBox fx:id="areaInserciones" prefHeight="544.0" prefWidth="822.0" />
+         </children></VBox>
+      <VBox prefHeight="330.0" prefWidth="458.0" styleClass="panel-primary" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+            <HBox alignment="CENTER" prefHeight="71.0" prefWidth="200.0" styleClass="panel-heading">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h3" text="GESTOR RESERVAS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="115.5" prefWidth="458.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onInsertButton" text="Insertar">
+                     <HBox.margin>
+                        <Insets right="66.0" />
+                     </HBox.margin>
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-primary" />
+                     </styleClass>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#onModifyButton" text="Modificar">
+                     <HBox.margin>
+                        <Insets right="66.0" />
+                     </HBox.margin>
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-primary" />
+                     </styleClass>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#onDeleteButton" text="Eliminar">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-primary" />
+                     </styleClass>
+                  </Button>
+               </children></HBox>
+            <HBox alignment="CENTER" prefHeight="115.0" prefWidth="458.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onRecargarButton" text="Recargar">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-primary" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="panel-primary" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <children>
+            <HBox alignment="CENTER" prefHeight="62.0" prefWidth="458.0" styleClass="panel-heading">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                           <image>
+                              <Image url="@../images/lupa.png" />
+                           </image>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h3" text="BUSCADOR" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="panel-body">
+               <children>
+                  <TextField fx:id="areaBusqueda" prefHeight="26.0" prefWidth="298.0" promptText="Inserta aquí tu búsqueda" />
+                  <Button mnemonicParsing="false" onAction="#onSearchButton" text="Buscar">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-primary" />
+                     </styleClass>
+                  </Button>
+               </children></HBox>
+            <TextFlow fx:id="textFlow" prefHeight="152.0" prefWidth="458.0" textAlignment="CENTER">
+               <children>
+                  <Text fx:id="mensaje" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h4">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+               </children>
+               <styleClass>
+                  <String fx:value="alert" />
+                  <String fx:value="alert-success" />
+               </styleClass>
+            </TextFlow>
+         </children>
+      </VBox>
+   </children>
+</GridPane>
